@@ -5,9 +5,9 @@ Version:	0.17.2
 Release:	1
 License:	GPL
 Group:		Themes
-# from		http://www.kde-look.org/content/download.php?content=5065
-Source0:	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
-# Source0-md5:	93726fd4fc5c91b5e4bc485fa8c5399c
+# from		http://www.kde-look.org/content/download.php?content=5065&id=1
+Source0:	%{name}-%{version}.tar.gz
+# Source0-md5:	a75e6182e81ac8ce8aedc797b8838125
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
