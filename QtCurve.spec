@@ -1,13 +1,13 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Wolna i poprawiona wersja tematu qtk/qt zrobionego przez Redhata
 Name:		QtCurve
-Version:	0.04
+Version:	0.05
 Release:	1
 License:	GPL
 Group:		Themes
 # from		http://www.kde-look.org/content/download.php?content=5065
 # redirected to	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.gz
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	qt >= 3.1
 BuildRequires:	kdebase >= 3.1
