@@ -86,6 +86,8 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 %build
 cp /usr/share/automake/config.sub admin
 
+%{?without_gtk:export "DO_NOT_COMPILE=gtk gtk2"}
+
 %configure
 
 %{__make}
@@ -107,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
 
+%if %{with gtk}
 %files -n gtk-theme-QtCurve
 %defattr(644,root,root,755)
 %{_libdir}/gtk/themes/engines/*.la
@@ -123,3 +126,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
 %dir %{_datadir}/themes/QtCurve*
+%endif
