@@ -1,0 +1,450 @@
+--- QtCurve-0.19/gtk/qtcurve.c.orig	2004-04-15 13:00:52.000000000 +0200
++++ QtCurve-0.19/gtk/qtcurve.c	2004-04-27 01:42:53.898063928 +0200
+@@ -359,6 +359,108 @@
+     }
+ }
+ 
++#if GTK_MAJOR_VERSION==1
++void gdk_rgb_find_color(GdkColormap *colormap, GdkColor *color)
++{
++    color->pixel = gdk_rgb_xpixel_from_rgb(((color->red >> 8) << 16) | ((color->green >> 8) << 8) | (color->blue >> 8));
++}
++#endif
++
++static void draw_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width, int height,
++                          GdkColor *begin_color, GdkColor *end_color, gboolean horiz, gboolean increase)
++{
++    if(width>0 && height>0)
++    {
++        GdkColor     col=*begin_color;
++        int          i,
++                     last=horiz ? height : width,
++                     dr=(end_color->red - begin_color->red) / last,
++                     dg=(end_color->green - begin_color->green) / last,
++                     db=(end_color->blue - begin_color->blue) / last;
++        GdkRectangle clip;
++        GdkGCValues  old_values;
++
++        clip.x = x;
++        clip.y = y;
++        clip.width = width;
++        clip.height = height;
++
++        gdk_gc_get_values(gc, &old_values);
++
++        if(area)
++        {
++            GdkRectangle clip2;
++
++            if(gdk_rectangle_intersect(area, &clip, &clip2))
++                gdk_gc_set_clip_rectangle(gc, gdk_rectangle_intersect(area, &clip, &clip2) ? &clip2 : &clip);
++        }
++        else if(region)
++            gdk_gc_set_clip_region(gc, region);
++
++        if(increase)
++            for(i = 0; i < last; i++)
++            {
++                gdk_rgb_find_color(colormap, &col);
++                gdk_gc_set_foreground(gc, &col);
++                if(horiz)
++                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
++                else
++                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
++                col.red += dr;
++                col.green += dg;
++                col.blue += db;
++            }
++        else
++            for(i=last-1; i>=0; i--)
++            {
++                gdk_rgb_find_color(colormap, &col);
++                gdk_gc_set_foreground(gc, &col);
++                if(horiz)
++                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
++                else
++                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
++                col.red += dr;
++                col.green += dg;
++                col.blue += db;
++            }
++
++        gdk_gc_set_foreground(gc, &old_values.foreground);
++        if(area)
++            gdk_gc_set_clip_rectangle(gc, NULL);
++        else if(region)
++            gdk_gc_set_clip_region(gc, NULL);
++    }
++}
++
++static void draw_bevel_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width,
++                                int height, GdkColor *base, double shade_top, double shade_bot, gboolean horiz, gboolean increase)
++{
++/*CPD TODO: Store last settings to make faster! */
++    GdkColor top,
++             bot,
++             *t,
++             *b;
++
++    top.pixel=bot.pixel=0;
++
++    if(equal(1.0, shade_top))
++        t=base;
++    else
++    {
++        shade(base, &top, shade_top);
++        t=&top;
++    }
++    if(equal(1.0, shade_bot))
++        b=base;
++    else
++    {
++        shade(base, &bot, shade_bot);
++        b=&bot;
++    }
++
++    draw_gradient(window, gc, colormap, area, region, x, y, width, height, t, b, horiz, increase);
++}
++
+ static void draw_check(GtkStyle *style, GdkWindow *window, GtkStateType state_type, GtkShadowType shadow_type, GdkRectangle *area,
+                        GtkWidget *widget, PCONST gchar *detail, gint x, gint y, gint width, gint height)
+ {
+@@ -891,113 +993,11 @@
+     b->blue = blue * 65535.0;
+ }
+ 
+-#if GTK_MAJOR_VERSION==1
+-void gdk_rgb_find_color(GdkColormap *colormap, GdkColor *color)
+-{
+-    color->pixel = gdk_rgb_xpixel_from_rgb(((color->red >> 8) << 16) | ((color->green >> 8) << 8) | (color->blue >> 8));
+-}
+-#endif
+-
+-static void draw_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width, int height,
+-                          GdkColor *begin_color, GdkColor *end_color, gboolean horiz, gboolean increase)
+-{
+-    if(width>0 && height>0)
+-    {
+-        GdkColor     col=*begin_color;
+-        int          i,
+-                     last=horiz ? height : width,
+-                     dr=(end_color->red - begin_color->red) / last,
+-                     dg=(end_color->green - begin_color->green) / last,
+-                     db=(end_color->blue - begin_color->blue) / last;
+-        GdkRectangle clip;
+-        GdkGCValues  old_values;
+-
+-        clip.x = x;
+-        clip.y = y;
+-        clip.width = width;
+-        clip.height = height;
+-
+-        gdk_gc_get_values(gc, &old_values);
+-
+-        if(area)
+-        {
+-            GdkRectangle clip2;
+-
+-            if(gdk_rectangle_intersect(area, &clip, &clip2))
+-                gdk_gc_set_clip_rectangle(gc, gdk_rectangle_intersect(area, &clip, &clip2) ? &clip2 : &clip);
+-        }
+-        else if(region)
+-            gdk_gc_set_clip_region(gc, region);
+-
+-        if(increase)
+-            for(i = 0; i < last; i++)
+-            {
+-                gdk_rgb_find_color(colormap, &col);
+-                gdk_gc_set_foreground(gc, &col);
+-                if(horiz)
+-                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
+-                else
+-                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
+-                col.red += dr;
+-                col.green += dg;
+-                col.blue += db;
+-            }
+-        else
+-            for(i=last-1; i>=0; i--)
+-            {
+-                gdk_rgb_find_color(colormap, &col);
+-                gdk_gc_set_foreground(gc, &col);
+-                if(horiz)
+-                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
+-                else
+-                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
+-                col.red += dr;
+-                col.green += dg;
+-                col.blue += db;
+-            }
+-
+-        gdk_gc_set_foreground(gc, &old_values.foreground);
+-        if(area)
+-            gdk_gc_set_clip_rectangle(gc, NULL);
+-        else if(region)
+-            gdk_gc_set_clip_region(gc, NULL);
+-    }
+-}
+-
+ static int equal(double d1, double d2)
+ {
+     return (fabs(d1 - d2) < 0.0001);
+ }
+ 
+-static void draw_bevel_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width,
+-                                int height, GdkColor *base, double shade_top, double shade_bot, gboolean horiz, gboolean increase)
+-{
+-/*CPD TODO: Store last settings to make faster! */
+-    GdkColor top,
+-             bot,
+-             *t,
+-             *b;
+-
+-    top.pixel=bot.pixel=0;
+-
+-    if(equal(1.0, shade_top))
+-        t=base;
+-    else
+-    {
+-        shade(base, &top, shade_top);
+-        t=&top;
+-    }
+-    if(equal(1.0, shade_bot))
+-        b=base;
+-    else
+-    {
+-        shade(base, &bot, shade_bot);
+-        b=&bot;
+-    }
+-
+-    draw_gradient(window, gc, colormap, area, region, x, y, width, height, t, b, horiz, increase);
+-}
+-
+ static void arrow_draw_hline(GdkWindow *window, GdkGC *gc, int x1, int x2, int y, gboolean last)
+ {
+     if(x2 - x1 < 7 && !last) /* 7 to get garretts pixels, otherwise 6 */
+--- QtCurve-0.19/gtk2/qtcurve.c.orig	2004-04-15 13:00:52.000000000 +0200
++++ QtCurve-0.19/gtk2/qtcurve.c	2004-04-27 01:49:33.512313328 +0200
+@@ -359,6 +359,108 @@
+     }
+ }
+ 
++#if GTK_MAJOR_VERSION==1
++void gdk_rgb_find_color(GdkColormap *colormap, GdkColor *color)
++{
++    color->pixel = gdk_rgb_xpixel_from_rgb(((color->red >> 8) << 16) | ((color->green >> 8) << 8) | (color->blue >> 8));
++}
++#endif
++
++static void draw_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width, int height,
++                          GdkColor *begin_color, GdkColor *end_color, gboolean horiz, gboolean increase)
++{
++    if(width>0 && height>0)
++    {
++        GdkColor     col=*begin_color;
++        int          i,
++                     last=horiz ? height : width,
++                     dr=(end_color->red - begin_color->red) / last,
++                     dg=(end_color->green - begin_color->green) / last,
++                     db=(end_color->blue - begin_color->blue) / last;
++        GdkRectangle clip;
++        GdkGCValues  old_values;
++
++        clip.x = x;
++        clip.y = y;
++        clip.width = width;
++        clip.height = height;
++
++        gdk_gc_get_values(gc, &old_values);
++
++        if(area)
++        {
++            GdkRectangle clip2;
++
++            if(gdk_rectangle_intersect(area, &clip, &clip2))
++                gdk_gc_set_clip_rectangle(gc, gdk_rectangle_intersect(area, &clip, &clip2) ? &clip2 : &clip);
++        }
++        else if(region)
++            gdk_gc_set_clip_region(gc, region);
++
++        if(increase)
++            for(i = 0; i < last; i++)
++            {
++                gdk_rgb_find_color(colormap, &col);
++                gdk_gc_set_foreground(gc, &col);
++                if(horiz)
++                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
++                else
++                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
++                col.red += dr;
++                col.green += dg;
++                col.blue += db;
++            }
++        else
++            for(i=last-1; i>=0; i--)
++            {
++                gdk_rgb_find_color(colormap, &col);
++                gdk_gc_set_foreground(gc, &col);
++                if(horiz)
++                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
++                else
++                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
++                col.red += dr;
++                col.green += dg;
++                col.blue += db;
++            }
++
++        gdk_gc_set_foreground(gc, &old_values.foreground);
++        if(area)
++            gdk_gc_set_clip_rectangle(gc, NULL);
++        else if(region)
++            gdk_gc_set_clip_region(gc, NULL);
++    }
++}
++
++static void draw_bevel_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width,
++                                int height, GdkColor *base, double shade_top, double shade_bot, gboolean horiz, gboolean increase)
++{
++/*CPD TODO: Store last settings to make faster! */
++    GdkColor top,
++             bot,
++             *t,
++             *b;
++
++    top.pixel=bot.pixel=0;
++
++    if(equal(1.0, shade_top))
++        t=base;
++    else
++    {
++        shade(base, &top, shade_top);
++        t=&top;
++    }
++    if(equal(1.0, shade_bot))
++        b=base;
++    else
++    {
++        shade(base, &bot, shade_bot);
++        b=&bot;
++    }
++
++    draw_gradient(window, gc, colormap, area, region, x, y, width, height, t, b, horiz, increase);
++}
++
+ static void draw_check(GtkStyle *style, GdkWindow *window, GtkStateType state_type, GtkShadowType shadow_type, GdkRectangle *area,
+                        GtkWidget *widget, PCONST gchar *detail, gint x, gint y, gint width, gint height)
+ {
+@@ -891,113 +993,11 @@
+     b->blue = blue * 65535.0;
+ }
+ 
+-#if GTK_MAJOR_VERSION==1
+-void gdk_rgb_find_color(GdkColormap *colormap, GdkColor *color)
+-{
+-    color->pixel = gdk_rgb_xpixel_from_rgb(((color->red >> 8) << 16) | ((color->green >> 8) << 8) | (color->blue >> 8));
+-}
+-#endif
+-
+-static void draw_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width, int height,
+-                          GdkColor *begin_color, GdkColor *end_color, gboolean horiz, gboolean increase)
+-{
+-    if(width>0 && height>0)
+-    {
+-        GdkColor     col=*begin_color;
+-        int          i,
+-                     last=horiz ? height : width,
+-                     dr=(end_color->red - begin_color->red) / last,
+-                     dg=(end_color->green - begin_color->green) / last,
+-                     db=(end_color->blue - begin_color->blue) / last;
+-        GdkRectangle clip;
+-        GdkGCValues  old_values;
+-
+-        clip.x = x;
+-        clip.y = y;
+-        clip.width = width;
+-        clip.height = height;
+-
+-        gdk_gc_get_values(gc, &old_values);
+-
+-        if(area)
+-        {
+-            GdkRectangle clip2;
+-
+-            if(gdk_rectangle_intersect(area, &clip, &clip2))
+-                gdk_gc_set_clip_rectangle(gc, gdk_rectangle_intersect(area, &clip, &clip2) ? &clip2 : &clip);
+-        }
+-        else if(region)
+-            gdk_gc_set_clip_region(gc, region);
+-
+-        if(increase)
+-            for(i = 0; i < last; i++)
+-            {
+-                gdk_rgb_find_color(colormap, &col);
+-                gdk_gc_set_foreground(gc, &col);
+-                if(horiz)
+-                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
+-                else
+-                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
+-                col.red += dr;
+-                col.green += dg;
+-                col.blue += db;
+-            }
+-        else
+-            for(i=last-1; i>=0; i--)
+-            {
+-                gdk_rgb_find_color(colormap, &col);
+-                gdk_gc_set_foreground(gc, &col);
+-                if(horiz)
+-                    gdk_draw_line(window, gc, x, y + i, x + width - 1, y + i);
+-                else
+-                    gdk_draw_line(window, gc, x + i, y,  x + i, y + height - 1);
+-                col.red += dr;
+-                col.green += dg;
+-                col.blue += db;
+-            }
+-
+-        gdk_gc_set_foreground(gc, &old_values.foreground);
+-        if(area)
+-            gdk_gc_set_clip_rectangle(gc, NULL);
+-        else if(region)
+-            gdk_gc_set_clip_region(gc, NULL);
+-    }
+-}
+-
+ static int equal(double d1, double d2)
+ {
+     return (fabs(d1 - d2) < 0.0001);
+ }
+ 
+-static void draw_bevel_gradient(GdkWindow *window, GdkGC *gc, GdkColormap *colormap, GdkRectangle *area, GdkRegion *region, int x, int y, int width,
+-                                int height, GdkColor *base, double shade_top, double shade_bot, gboolean horiz, gboolean increase)
+-{
+-/*CPD TODO: Store last settings to make faster! */
+-    GdkColor top,
+-             bot,
+-             *t,
+-             *b;
+-
+-    top.pixel=bot.pixel=0;
+-
+-    if(equal(1.0, shade_top))
+-        t=base;
+-    else
+-    {
+-        shade(base, &top, shade_top);
+-        t=&top;
+-    }
+-    if(equal(1.0, shade_bot))
+-        b=base;
+-    else
+-    {
+-        shade(base, &bot, shade_bot);
+-        b=&bot;
+-    }
+-
+-    draw_gradient(window, gc, colormap, area, region, x, y, width, height, t, b, horiz, increase);
+-}
+-
+ static void arrow_draw_hline(GdkWindow *window, GdkGC *gc, int x1, int x2, int y, gboolean last)
+ {
+     if(x2 - x1 < 7 && !last) /* 7 to get garretts pixels, otherwise 6 */
