@@ -8,6 +8,7 @@ Group:		Themes
 # from		http://www.kde-look.org/content/download.php?content=5065
 # redirected to	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
 Source0:	%{name}-%{version}.tar.gz
+# Source0-md5: dbe87cc12125f4f2abff7928eb4c324e
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	qt >= 3.1
 BuildRequires:	kdebase >= 3.1
