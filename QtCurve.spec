@@ -5,6 +5,7 @@ Version:	0.07
 Release:	4
 License:	GPL
 Group:		Themes
+Vendor:		Craig Drummond <Craig.Drummond@lycos.co.uk>
 # from		http://www.kde-look.org/content/download.php?content=5065
 # redirected to	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
 Source0:	%{name}-%{version}.tar.gz
@@ -14,12 +15,10 @@ BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A free and corrected port of Redhat's gtk/qt theme, made by Craig
-Drummond <Craig.Drummond@lycos.co.uk>.
+A free and corrected port of Redhat's gtk/qt theme.
 
 %description -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
-autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>.
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
 
 %package -n kde-style-QtCurve
 Summary:	A free and corrected port of Redhat's gtk/qt theme
@@ -30,13 +29,11 @@ Obsoletes:	kde-style-bluecurve
 Obsoletes:	kde-theme-bluecurve
 
 %description -n kde-style-QtCurve
-A free and corrected port of Redhat's gtk/qt theme, made by Craig
-Drummond <Craig.Drummond@lycos.co.uk>. KDE version.
+A free and corrected port of Redhat's gtk/qt theme. KDE version.
 
 %description -n kde-style-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
-autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
-KDE.
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
+Wersja pod KDE.
 
 %package -n gtk-theme-QtCurve
 Summary:        A free and corrected port of Redhat's gtk/qt theme
@@ -47,13 +44,11 @@ Requires:       theme-QtCurve-common
 Obsoletes:	gtk-theme-bluecurve
 
 %description -n gtk-theme-QtCurve
-A free and corrected port of Redhat's gtk/qt theme, made by Craig
-Drummond <Craig.Drummond@lycos.co.uk>. gtk version.
+A free and corrected port of Redhat's gtk/qt theme. gtk version.
 
 %description -n gtk-theme-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
-autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
-gtk.
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
+Wersja pod gtk.
 
 %package -n gtk2-theme-QtCurve
 Summary:        A free and corrected port of Redhat's gtk/qt theme
@@ -64,13 +59,11 @@ Requires:       theme-QtCurve-common
 Obsoletes:	gtk2-theme-bluecurve
 
 %description -n gtk2-theme-QtCurve
-A free and corrected port of Redhat's gtk/qt theme, made by Craig
-Drummond <Craig.Drummond@lycos.co.uk>. gtk2 version.
+A free and corrected port of Redhat's gtk/qt theme. gtk2 version.
 
 %description  -n gtk2-theme-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
-autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
-gtk2.
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
+Wersja pod gtk2.
 
 %package -n theme-QtCurve-common
 Summary:        A free and corrected port of Redhats gtk/qt theme - common
@@ -79,14 +72,12 @@ Group:          Themes
 Obsoletes:	theme-bluecurve-common
 
 %description -n theme-QtCurve-common
-A free and corrected port of Redhats gtk/qt theme, made by Craig 
-Drummond (Craig.Drummond@lycos.co.uk) Documentation and common 
-files package.
+A free and corrected port of Redhats gtk/qt theme.
+Documentation and common files package.
 
 %description  -n theme-QtCurve-common -l pl
-Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata, 
-autorstwa Craig Drummond (Craig.Drummond@lycos.co.uk) Pakiet z 
-dokumentacja i plikami wspó³dzielonymi.
+Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata.
+Pakiet z dokumentacja i plikami wspó³dzielonymi.
 
 %prep
 %setup -q
@@ -98,7 +89,8 @@ dokumentacja i plikami wspó³dzielonymi.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
