@@ -5,12 +5,12 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
-Version:	0.19
-Release:	2
+Version:	0.20
+Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
-# Source0-md5:	d7b8addee47e7f9903a75f0ff3a3ecb6
+# Source0-md5:	a485093b0b21e55552ccfd65b16d3513
 Patch0:		%{name}-gcc34.patch
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:  automake
