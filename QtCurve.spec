@@ -101,6 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n kde-style-QtCurve
 %defattr(644,root,root,755)
+%{_libdir}/kde3/kstyle_qtcurve_config.la
+%attr(755,root,root) %{_libdir}/kde3/kstyle_qtcurve_config.so
 %{_libdir}/kde3/plugins/styles/*.la
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
