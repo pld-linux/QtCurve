@@ -1,13 +1,16 @@
+
+%bcond_without gtk	# do not build gtk+(2) styles
+
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
-Version:	0.17.2
-Release:	2
+Version:	0.18
+Release:	1
 License:	GPL
 Group:		Themes
 # from		http://www.kde-look.org/content/download.php?content=5065&id=1
 Source0:	%{name}-%{version}.tar.gz
-# Source0-md5:	a75e6182e81ac8ce8aedc797b8838125
+# Source0-md5:	b42974ade8866c1b00808af9f0e47d61
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -86,7 +89,7 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 %build
 cp /usr/share/automake/config.sub admin
 
-%{?without_gtk:export "DO_NOT_COMPILE=gtk gtk2"}
+%{!?with_gtk:export "DO_NOT_COMPILE=gtk gtk2"}
 
 %configure
 
