@@ -1,7 +1,7 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Wolna i poprawiona wersja tematu qtk/qt zrobionego przez Redhata
 Name:		QtCurve
-Version:	0.06
+Version:	0.07
 Release:	1
 License:	GPL
 Group:		Themes
