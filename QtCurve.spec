@@ -1,6 +1,7 @@
-
+#
+# Conditional build:
 %bcond_without gtk	# do not build gtk+(2) styles
-
+#
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
@@ -12,6 +13,7 @@ Group:		Themes
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	b42974ade8866c1b00808af9f0e47d61
 URL:		http://www.kde-look.org/content/show.php?content=5065
+BuildRequires:	automake
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,8 +41,7 @@ Summary:	A free and corrected port of Redhat's gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
 Requires:	gtk+
-Requires:	theme-QtCurve-common
-
+Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk-theme-QtCurve
 A free and corrected port of Redhat's gtk/qt theme. gtk version.
@@ -54,8 +55,7 @@ Summary:	A free and corrected port of Redhat's gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
 Requires:	gtk+
-Requires:	theme-QtCurve-common
-
+Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk2-theme-QtCurve
 A free and corrected port of Redhat's gtk/qt theme. gtk2 version.
@@ -73,7 +73,6 @@ Obsoletes:	gtk2-theme-bluecurve
 Obsoletes:	gtk-theme-bluecurve
 Obsoletes:	kde-style-bluecurve
 Obsoletes:	kde-theme-bluecurve
-
 
 %description -n theme-QtCurve-common
 A free and corrected port of Redhats gtk/qt theme.
@@ -101,6 +100,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+rm -f $RPM_BUILD_ROOT{%{_libdir}/gtk/themes/engines,%{_libdir}/gtk-2.0/*/*}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -115,13 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gtk}
 %files -n gtk-theme-QtCurve
 %defattr(644,root,root,755)
-%{_libdir}/gtk/themes/engines/*.la
 %attr(755,root,root) %{_libdir}/gtk/themes/engines/*.so
 %{_datadir}/themes/QtCurve*/gtk
 
 %files -n gtk2-theme-QtCurve
 %defattr(644,root,root,755)
-%{_libdir}/gtk-2.0/*/*/*.la
 %attr(755,root,root) %{_libdir}/gtk-2.0/*/*/*.so
 %{_datadir}/themes/QtCurve*/gtk-2.0
 
