@@ -13,7 +13,7 @@ Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
 # Source0-md5:	a485093b0b21e55552ccfd65b16d3513
 Patch0:		%{name}-gcc34.patch
 URL:		http://www.kde-look.org/content/show.php?content=5065
-BuildRequires:  automake
+BuildRequires:	automake
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
