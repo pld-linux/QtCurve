@@ -1,9 +1,9 @@
 #
 # Conditional build:
-%bcond_without	gtk	# do not build gtk+(2) styles
+%bcond_without	gtk	# do not build GTK+(2) styles
 #
-Summary:	A free and corrected port of Redhats gtk/qt theme
-Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
+Summary:	A free and corrected port of Redhats GTK+/Qt theme
+Summary(pl):	Darmowa i poprawiona wersja tematu GTK+/Qt zrobionego przez Redhata
 Name:		QtCurve
 Version:	0.20
 Release:	1
@@ -18,55 +18,55 @@ BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A free and corrected port of Redhat's gtk/qt theme.
+A free and corrected port of Redhat's GTK+/Qt theme.
 
 %description -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
+Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata.
 
 %package -n kde-style-QtCurve
-Summary:	A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
+Summary:	A free and corrected port of Redhat's GTK+/Qt theme
+Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata
 Group:		Themes
 Requires:	kdelibs >= 3.1
 
 %description -n kde-style-QtCurve
-A free and corrected port of Redhat's gtk/qt theme. KDE version.
+A free and corrected port of Redhat's GTK+/Qt theme. KDE version.
 
 %description -n kde-style-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
+Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata.
 Wersja pod KDE.
 
 %package -n gtk-theme-QtCurve
-Summary:	A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
+Summary:	A free and corrected port of Redhat's GTK+/Qt theme
+Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata
 Group:		Themes
 Requires:	gtk+
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk-theme-QtCurve
-A free and corrected port of Redhat's gtk/qt theme. gtk version.
+A free and corrected port of Redhat's GTK+/Qt theme. GTK+ version.
 
 %description -n gtk-theme-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
-Wersja pod gtk.
+Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata.
+Wersja pod GTK+.
 
 %package -n gtk2-theme-QtCurve
-Summary:	A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
+Summary:	A free and corrected port of Redhat's GTK+/Qt theme
+Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata
 Group:		Themes
 Requires:	gtk+
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk2-theme-QtCurve
-A free and corrected port of Redhat's gtk/qt theme. gtk2 version.
+A free and corrected port of Redhat's GTK+/Qt theme. GTK+2 version.
 
 %description -n gtk2-theme-QtCurve -l pl
-Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
-Wersja pod gtk2.
+Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Redhata.
+Wersja pod GTK+2.
 
 %package -n theme-QtCurve-common
-Summary:	A free and corrected port of Redhats gtk/qt theme - common
-Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata - common
+Summary:	A free and corrected port of Redhats GTK+/Qt theme - common
+Summary(pl):	Darmowa i poprawiona wersja tematu GTK+/Qt zrobionego przez Redhata - common
 Group:		Themes
 Obsoletes:	theme-bluecurve-common
 Obsoletes:	gtk2-theme-bluecurve
@@ -75,11 +75,11 @@ Obsoletes:	kde-style-bluecurve
 Obsoletes:	kde-theme-bluecurve
 
 %description -n theme-QtCurve-common
-A free and corrected port of Redhats gtk/qt theme.
+A free and corrected port of Redhats GTK+/Qt theme.
 Documentation and common files package.
 
 %description -n theme-QtCurve-common -l pl
-Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata.
+Darmowa i poprawiona wersja tematu GTK+/Qt zrobionego przez Redhata.
 Pakiet z dokumentacja i plikami wspó³dzielonymi.
 
 %prep
