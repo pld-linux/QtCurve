@@ -1,5 +1,5 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
-Summary(pl):	Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
+Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
 Version:	0.10
 Release:	1
@@ -33,11 +33,11 @@ Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
 Wersja pod KDE.
 
 %package -n gtk-theme-QtCurve
-Summary:        A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
-Group:          Themes
-Requires:       gtk+ 
-Requires:       theme-QtCurve-common
+Summary:	A free and corrected port of Redhat's gtk/qt theme
+Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
+Group:		Themes
+Requires:	gtk+ 
+Requires:	theme-QtCurve-common
 
 
 %description -n gtk-theme-QtCurve
@@ -48,11 +48,11 @@ Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
 Wersja pod gtk.
 
 %package -n gtk2-theme-QtCurve
-Summary:        A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
-Group:          Themes
-Requires:       gtk+
-Requires:       theme-QtCurve-common
+Summary:	A free and corrected port of Redhat's gtk/qt theme
+Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
+Group:		Themes
+Requires:	gtk+
+Requires:	theme-QtCurve-common
 
 
 %description -n gtk2-theme-QtCurve
@@ -63,14 +63,14 @@ Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata.
 Wersja pod gtk2.
 
 %package -n theme-QtCurve-common
-Summary:        A free and corrected port of Redhats gtk/qt theme - common
-Summary(pl):    Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata - common
-Group:          Themes
+Summary:	A free and corrected port of Redhats gtk/qt theme - common
+Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata - common
+Group:		Themes
 Obsoletes:	theme-bluecurve-common
-Obsoletes:      gtk2-theme-bluecurve
-Obsoletes:      gtk-theme-bluecurve
-Obsoletes:      kde-style-bluecurve
-Obsoletes:      kde-theme-bluecurve
+Obsoletes:	gtk2-theme-bluecurve
+Obsoletes:	gtk-theme-bluecurve
+Obsoletes:	kde-style-bluecurve
+Obsoletes:	kde-theme-bluecurve
 
 
 %description -n theme-QtCurve-common
@@ -78,7 +78,7 @@ A free and corrected port of Redhats gtk/qt theme.
 Documentation and common files package.
 
 %description  -n theme-QtCurve-common -l pl
-Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata.
+Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata.
 Pakiet z dokumentacja i plikami wspó³dzielonymi.
 
 %prep
