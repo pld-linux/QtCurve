@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without gtk	# do not build gtk+(2) styles
+%bcond_without	gtk	# do not build gtk+(2) styles
 #
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
@@ -10,7 +10,7 @@ Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
-# Source0-md5:	b42974ade8866c1b00808af9f0e47d61
+# Source0-md5:	d7b8addee47e7f9903a75f0ff3a3ecb6
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:  automake
 BuildRequires:	kdelibs-devel >= 3.1
