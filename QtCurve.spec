@@ -1,5 +1,5 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
-Summary(pl):	Wolna i poprawiona wersja tematu qtk/qt zrobionego przez Redhata
+Summary(pl):	Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
 Version:	0.07
 Release:	1
@@ -18,12 +18,12 @@ A free and corrected port of Redhat's gtk/qt theme, made by Craig
 Drummond <Craig.Drummond@lycos.co.uk>.
 
 %description -l pl
-Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata,
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
 autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>.
 
 %package -n kde-theme-bluecurve
 Summary:	A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata
+Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
 Requires:	kdebase >= 3.1
 
@@ -32,13 +32,13 @@ A free and corrected port of Redhat's gtk/qt theme, made by Craig
 Drummond <Craig.Drummond@lycos.co.uk>. KDE version.
 
 %description -n kde-theme-bluecurve -l pl
-Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata,
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
 autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
 KDE.
 
 %package -n gtk-theme-bluecurve
 Summary:        A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):    Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata
+Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:          Themes
 Requires:       gtk+ 
 Requires:       theme-bluecurve-common
@@ -48,13 +48,13 @@ A free and corrected port of Redhat's gtk/qt theme, made by Craig
 Drummond <Craig.Drummond@lycos.co.uk>. gtk version.
 
 %description -n gtk-theme-bluecurve -l pl
-Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata,
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
 autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
 gtk.
 
 %package -n gtk2-theme-bluecurve
 Summary:        A free and corrected port of Redhat's gtk/qt theme
-Summary(pl):    Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata
+Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:          Themes
 Requires:       gtk+
 Requires:       theme-bluecurve-common
@@ -64,13 +64,13 @@ A free and corrected port of Redhat's gtk/qt theme, made by Craig
 Drummond <Craig.Drummond@lycos.co.uk>. gtk2 version.
 
 %description  -n gtk2-theme-bluecurve -l pl
-Darmowa i poprawiona wersja motywu qtk/qt zrobionego przez Redhata,
+Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata,
 autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>. Wersja pod
 gtk2.
 
 %package -n theme-bluecurve-common
 Summary:        A free and corrected port of Redhats gtk/qt theme - common
-Summary(pl):    Wolna i poprawiona wersja tematu qtk/qt zrobionego przez Redhata - common
+Summary(pl):    Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata - common
 Group:          Themes
 
 %description -n theme-bluecurve-common
@@ -79,7 +79,7 @@ Drummond (Craig.Drummond@lycos.co.uk) Documentation and common
 files package.
 
 %description  -n theme-bluecurve-common -l pl
-Wolna i poprawiona wersja tematu qtk/qt zrobionego przez Redhata, 
+Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata, 
 autorstwa Craig Drummond (Craig.Drummond@lycos.co.uk) Pakiet z 
 dokumentacja i plikami wspó³dzielonymi.
 
