@@ -2,7 +2,7 @@ Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
 Version:	0.07
-Release:	2
+Release:	3
 License:	GPL
 Group:		Themes
 # from		http://www.kde-look.org/content/download.php?content=5065
@@ -10,8 +10,7 @@ Group:		Themes
 Source0:	%{name}-%{version}.tar.gz
 # Source0-md5: dbe87cc12125f4f2abff7928eb4c324e
 URL:		http://www.kde-look.org/content/show.php?content=5065
-BuildRequires:	qt >= 3.1
-BuildRequires:	kdebase >= 3.1
+BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,7 +25,7 @@ autorstwa Craiga Drummonda <Craig.Drummond@lycos.co.uk>.
 Summary:	A free and corrected port of Redhat's gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
-Requires:	kdebase >= 3.1
+Requires:	kdelibs >= 3.1
 Obsoletes:	kde-theme-bluecurve
 
 %description -n kde-style-bluecurve
