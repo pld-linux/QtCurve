@@ -8,7 +8,7 @@ Group:		Themes
 Vendor:		Craig Drummond <Craig.Drummond@lycos.co.uk>
 # from		http://www.kde-look.org/content/download.php?content=5065
 Source0:	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
-# Source0-md5:	f431823ae2b2d6cba18e1a254af5945e 
+# Source0-md5:	f431823ae2b2d6cba18e1a254af5945e
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -36,7 +36,7 @@ Wersja pod KDE.
 Summary:	A free and corrected port of Redhat's gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
-Requires:	gtk+ 
+Requires:	gtk+
 Requires:	theme-QtCurve-common
 
 
@@ -118,4 +118,4 @@ rm -rf $RPM_BUILD_ROOT
 %files -n theme-QtCurve-common
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
-%dir %{_datadir}/themes/QtCurve* 
+%dir %{_datadir}/themes/QtCurve*
