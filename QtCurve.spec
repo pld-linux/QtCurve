@@ -1,15 +1,14 @@
 Summary:	A free and corrected port of Redhats gtk/qt theme
 Summary(pl):	Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata
 Name:		QtCurve
-Version:	0.07
-Release:	4
+Version:	0.10
+Release:	1
 License:	GPL
 Group:		Themes
 Vendor:		Craig Drummond <Craig.Drummond@lycos.co.uk>
 # from		http://www.kde-look.org/content/download.php?content=5065
-# redirected to	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
-Source0:	%{name}-%{version}.tar.gz
-# Source0-md5: dbe87cc12125f4f2abff7928eb4c324e
+Source0:	http://www.kde-look.org/content/files/5065-%{name}-%{version}.tar.gz
+# Source0-md5:	f431823ae2b2d6cba18e1a254af5945e 
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -25,8 +24,6 @@ Summary:	A free and corrected port of Redhat's gtk/qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redhata
 Group:		Themes
 Requires:	kdelibs >= 3.1
-Obsoletes:	kde-style-bluecurve
-Obsoletes:	kde-theme-bluecurve
 
 %description -n kde-style-QtCurve
 A free and corrected port of Redhat's gtk/qt theme. KDE version.
@@ -41,7 +38,7 @@ Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redha
 Group:          Themes
 Requires:       gtk+ 
 Requires:       theme-QtCurve-common
-Obsoletes:	gtk-theme-bluecurve
+
 
 %description -n gtk-theme-QtCurve
 A free and corrected port of Redhat's gtk/qt theme. gtk version.
@@ -56,7 +53,7 @@ Summary(pl):    Darmowa i poprawiona wersja motywu gtk/qt zrobionego przez Redha
 Group:          Themes
 Requires:       gtk+
 Requires:       theme-QtCurve-common
-Obsoletes:	gtk2-theme-bluecurve
+
 
 %description -n gtk2-theme-QtCurve
 A free and corrected port of Redhat's gtk/qt theme. gtk2 version.
@@ -70,6 +67,11 @@ Summary:        A free and corrected port of Redhats gtk/qt theme - common
 Summary(pl):    Wolna i poprawiona wersja tematu gtk/qt zrobionego przez Redhata - common
 Group:          Themes
 Obsoletes:	theme-bluecurve-common
+Obsoletes:      gtk2-theme-bluecurve
+Obsoletes:      gtk-theme-bluecurve
+Obsoletes:      kde-style-bluecurve
+Obsoletes:      kde-theme-bluecurve
+
 
 %description -n theme-QtCurve-common
 A free and corrected port of Redhats gtk/qt theme.
@@ -99,21 +101,21 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/kde3/plugins/styles/*.la
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
-%{_datadir}/apps/kstyle/themes/qtcurve.themerc
+%{_datadir}/apps/kstyle/themes/qtcurve*.themerc
 
 %files -n gtk-theme-QtCurve
 %defattr(644,root,root,755)
 %{_libdir}/gtk/themes/engines/*.la
 %attr(755,root,root) %{_libdir}/gtk/themes/engines/*.so
-%{_datadir}/themes/QtCurve/gtk
+%{_datadir}/themes/QtCurve*/gtk
 
 %files -n gtk2-theme-QtCurve
 %defattr(644,root,root,755)
 %{_libdir}/gtk-2.0/*/*/*.la
 %attr(755,root,root) %{_libdir}/gtk-2.0/*/*/*.so
-%{_datadir}/themes/QtCurve/gtk-2.0
+%{_datadir}/themes/QtCurve*/gtk-2.0
 
 %files -n theme-QtCurve-common
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
-%dir %{_datadir}/themes/QtCurve 
+%dir %{_datadir}/themes/QtCurve* 
