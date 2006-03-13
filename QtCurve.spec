@@ -5,13 +5,13 @@
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.20
+Version:	0.34
 Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
-# Source0-md5:	a485093b0b21e55552ccfd65b16d3513
-Patch0:		%{name}-gcc34.patch
+# Source0-md5:	fe712471bc69bf127201e85c3a53f49d
+#Patch0:		%{name}-gcc34.patch
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	automake
 BuildRequires:	kdelibs-devel >= 3.1
@@ -84,7 +84,7 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 
 %prep
 %setup -q
-%patch0 -p1
+#`%patch0 -p1
 
 %build
 cp /usr/share/automake/config.sub admin
@@ -114,6 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/kde3/plugins/styles/*.la
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
+%{_datadir}/apps/qtcurve
 
 %if %{with gtk}
 %files -n gtk-theme-QtCurve
