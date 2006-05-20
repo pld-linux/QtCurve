@@ -1,16 +1,19 @@
 #
+# ToDo:
+#  - include /usr/share/themes/QtCurve/mozilla somewhere
+#
 # Conditional build:
 %bcond_without	gtk	# do not build GTK+(2) styles
 #
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.34
+Version:	0.35.1
 Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
-# Source0-md5:	fe712471bc69bf127201e85c3a53f49d
+# Source0-md5:	c66328fcb43cc34a61caafdc515220c8
 #Patch0:		%{name}-gcc34.patch
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	automake
