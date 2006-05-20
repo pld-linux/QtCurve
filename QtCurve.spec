@@ -19,7 +19,7 @@ Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
 URL:		http://www.kde-look.org/content/show.php?content=5065
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_gtk:BuildRequires:	gtk-devel}
+%{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRequires:	pkgconfig
