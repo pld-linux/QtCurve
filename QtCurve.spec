@@ -3,7 +3,8 @@
 #  - include /usr/share/themes/QtCurve/mozilla somewhere
 #
 # Conditional build:
-%bcond_without	gtk	# do not build GTK+(2) styles
+%bcond_with	gtk	# build GTK styles
+%bcond_without	gtk2	# don't build GTK+2 styles
 #
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -16,8 +17,12 @@ Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
 # Source0-md5:	c66328fcb43cc34a61caafdc515220c8
 #Patch0:		%{name}-gcc34.patch
 URL:		http://www.kde-look.org/content/show.php?content=5065
+BuildRequires:	autoconf
 BuildRequires:	automake
+%{?with_gtk:BuildRequires:	gtk-devel}
+%{?with_gtk2:BuildRequires:	gtk+2-devel}
 BuildRequires:	kdelibs-devel >= 3.1
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,7 +48,6 @@ Wersja pod KDE.
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Group:		Themes
-Requires:	gtk+
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk-theme-QtCurve
@@ -57,7 +61,6 @@ Wersja pod GTK+.
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Group:		Themes
-Requires:	gtk+
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk2-theme-QtCurve
@@ -92,9 +95,7 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 %build
 cp /usr/share/automake/config.sub admin
 
-%{!?with_gtk:export "DO_NOT_COMPILE=gtk gtk2"}
-##export UNSERMAKE=/usr/share/unsermake/unsermake
-##%{__make} -f admin/Makefile.common cvs
+%{__make} -f admin/Makefile.common cvs
 %configure
 
 %{__make}
@@ -124,14 +125,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gtk/themes/engines/*.so
 %{_datadir}/themes/QtCurve*/gtk
+%endif
 
+%if %{with gtk2}
 %files -n gtk2-theme-QtCurve
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gtk-2.0/*/*/*.so
 %{_datadir}/themes/QtCurve*/gtk-2.0
+%endif
 
 %files -n theme-QtCurve-common
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
 %dir %{_datadir}/themes/QtCurve*
-%endif
