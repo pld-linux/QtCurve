@@ -9,13 +9,13 @@
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.36
+Version:	0.38
 Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://www.cpdrummond.freeuk.com/%{name}-%{version}.tar.gz
-# Source0-md5:	6ea0c0b83ec8456c13f566fe5b0df894
-URL:		http://www.kde-look.org/content/show.php?content=5065
+# Source0-md5:	1e9145e20e2df5a1f572767d158f66d5
+URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_gtk:BuildRequires:	gtk+-devel}
