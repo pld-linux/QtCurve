@@ -22,6 +22,7 @@ BuildRequires:	automake
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRequires:	pkgconfig
+BuildRequires:	sed > 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -89,6 +90,8 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 
 %prep
 %setup -q
+sed -i "s#/lib/gtk/#/%{_lib}/gtk/#g" gtk/Makefile.am
+sed -i "s#/lib/gtk-2.0/#/%{_lib}/gtk-2.0/#g" gtk2/Makefile.am
 
 %build
 cp /usr/share/automake/config.sub admin
