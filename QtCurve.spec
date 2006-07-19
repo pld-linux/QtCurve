@@ -94,7 +94,8 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 cp /usr/share/automake/config.sub admin
 
 %{__make} -f admin/Makefile.common cvs
-%configure
+%configure \
+	--with-qt-libraries=%{_libdir}
 
 %{__make}
 
