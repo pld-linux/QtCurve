@@ -1,0 +1,42 @@
+--- QtCurve-0.45/QtCurve-Gtk1-0.42.2/gtk/Makefile.am.orig	2006-07-23 14:41:26.000000000 +0200
++++ QtCurve-0.45/QtCurve-Gtk1-0.42.2/gtk/Makefile.am	2006-11-18 16:15:43.108926732 +0100
+@@ -1,5 +1,5 @@
+ INCLUDES = $(GTK_CFLAGS)
+-enginedir = $(GTK_PREFIX)/lib/gtk/themes/engines
++enginedir = $(libdir)/gtk/themes/engines
+ engine_LTLIBRARIES = libqtcurve.la
+ libqtcurve_la_SOURCES = qtcurve.c
+ libqtcurve_la_LDFLAGS = -module -avoid-version
+@@ -7,6 +7,6 @@
+ noinst_HEADERS = qtcurve.h common.h
+ EXTRA_DIST = qt_settings.c gtkrc config_file.c
+ 
+-themedir = $(GTK_PREFIX)/share/themes/QtCurve/gtk
++themedir = $(datadir)/themes/QtCurve/gtk
+ theme_DATA = gtkrc
+ 
+--- QtCurve-0.45/QtCurve-Gtk2-0.45.3/gtk2/Makefile.am.orig	2006-10-19 21:31:56.000000000 +0200
++++ QtCurve-0.45/QtCurve-Gtk2-0.45.3/gtk2/Makefile.am	2006-11-18 16:01:11.291136621 +0100
+@@ -1,4 +1,4 @@
+-mozilladir=$(GTK2_PREFIX)/share/themes/QtCurve/mozilla
++mozilladir=$(datadir)/themes/QtCurve/mozilla
+ mozilla_DATA=QtCurve.css preferences-rev.xml firefox-user.js mailto.sh
+ 
+ QtCurve.css : QtCurve.css.in
+@@ -16,14 +16,14 @@
+ qtcurve.lo: pixmaps.h
+ 
+ INCLUDES = $(GTK2_CFLAGS) -DKDE_ICONS_PREFIX=\"$(KDE_PREFIX)/share/icons\" -I../kde -DQTC_MOZILLA_DIR=\"$(mozilladir)\"
+-enginedir = $(GTK2_PREFIX)/lib/gtk-2.0/$(GTK2_VERSION)/engines
++enginedir = $(libdir)/gtk-2.0/$(GTK2_VERSION)/engines
+ engine_LTLIBRARIES = libqtcurve.la
+ libqtcurve_la_SOURCES = qtcurve.c
+ libqtcurve_la_LDFLAGS = -avoid-version -module
+ libqtcurve_la_LIBADD = $(GTK2_LIBS)
+ noinst_HEADERS = qtcurve.h common.h
+ 
+-themedir = $(GTK2_PREFIX)/share/themes/QtCurve/gtk-2.0
++themedir = $(datadir)/themes/QtCurve/gtk-2.0
+ theme_DATA = gtkrc
+ 
+ EXTRA_DIST = gtkrc-top icons create_gtkrc.pl qt_settings.c QtCurve.css.in firefox-user.js.in mailto.sh preferences-rev.xml config_file.c animation.c radio_frame.png radio_light.png radio_on.png check_on.png pixmaps.h
