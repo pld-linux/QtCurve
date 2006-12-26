@@ -6,23 +6,25 @@
 %bcond_with	gtk	# build GTK styles
 %bcond_without	gtk2	# don't build GTK+2 styles
 #
-%define		kde_ver		0.45.2
-%define		gtk2_ver	0.45.3
+%define		kde_ver		0.46.2
+%define		gtk2_ver	0.46.2
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.45
+Version:	0.46.2
 Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.gz
-# Source0-md5:	be84b6d28bf88510952f1cf866647162
+# Source0-md5:	928ff52cdb312275ee24363501faa5e2
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.gz
-# Source1-md5:	877c3a85c358689bd30af78951710d83
+# Source1-md5:	ca4827f073ba93d517522d1c65a6d8f5
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-amd64.patch
+Patch1:		%{name}-am.patch
+Patch2:		kde-ac260-lt.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -100,6 +102,9 @@ Pakiet z dokumentacja i plikami wspó³dzielonymi.
 %prep
 %setup -q -c -a1 -a2
 %patch0 -p1
+cd %{name}-KDE3-%{kde_ver}
+%patch1 -p1
+%patch2 -p1
 
 %build
 cd %{name}-KDE3-%{kde_ver}
