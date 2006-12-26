@@ -15,8 +15,8 @@
 +themedir = $(datadir)/themes/QtCurve/gtk
  theme_DATA = gtkrc
  
---- QtCurve-0.45/QtCurve-Gtk2-0.45.3/gtk2/Makefile.am.orig	2006-10-19 21:31:56.000000000 +0200
-+++ QtCurve-0.45/QtCurve-Gtk2-0.45.3/gtk2/Makefile.am	2006-11-18 16:01:11.291136621 +0100
+--- QtCurve-0.45/QtCurve-Gtk2-0.46.2/gtk2/Makefile.am.orig	2006-10-19 21:31:56.000000000 +0200
++++ QtCurve-0.45/QtCurve-Gtk2-0.46.2/gtk2/Makefile.am	2006-11-18 16:01:11.291136621 +0100
 @@ -1,4 +1,4 @@
 -mozilladir=$(GTK2_PREFIX)/share/themes/QtCurve/mozilla
 +mozilladir=$(datadir)/themes/QtCurve/mozilla
