@@ -10,7 +10,7 @@
 %define		gtk2_ver	0.46.2
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Summary(pl.UTF-8):   Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
 Version:	0.46.2
 Release:	1
@@ -39,51 +39,51 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A free and corrected port of Red Hat's GTK+/Qt theme.
 
-%description -l pl
+%description -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 
 %package -n kde-style-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Summary(pl.UTF-8):   Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Group:		Themes
 Requires:	kdelibs >= 3.1
 
 %description -n kde-style-QtCurve
 A free and corrected port of Red Hat's GTK+/Qt theme. KDE version.
 
-%description -n kde-style-QtCurve -l pl
+%description -n kde-style-QtCurve -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Wersja pod KDE.
 
 %package -n gtk-theme-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Summary(pl.UTF-8):   Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Group:		Themes
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk-theme-QtCurve
 A free and corrected port of Red Hat's GTK+/Qt theme. GTK+ version.
 
-%description -n gtk-theme-QtCurve -l pl
+%description -n gtk-theme-QtCurve -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Wersja pod GTK+.
 
 %package -n gtk2-theme-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
-Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Summary(pl.UTF-8):   Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Group:		Themes
 Requires:	theme-QtCurve-common = %{version}-%{release}
 
 %description -n gtk2-theme-QtCurve
 A free and corrected port of Red Hat's GTK+/Qt theme. GTK+2 version.
 
-%description -n gtk2-theme-QtCurve -l pl
+%description -n gtk2-theme-QtCurve -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Wersja pod GTK+2.
 
 %package -n theme-QtCurve-common
 Summary:	A free and corrected port of Redhats GTK+/Qt theme - common
-Summary(pl):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata - common
+Summary(pl.UTF-8):   Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata - common
 Group:		Themes
 Obsoletes:	theme-bluecurve-common
 Obsoletes:	gtk2-theme-bluecurve
@@ -95,9 +95,9 @@ Obsoletes:	kde-theme-bluecurve
 A free and corrected port of Red Hat's GTK+/Qt theme.
 Documentation and common files package.
 
-%description -n theme-QtCurve-common -l pl
+%description -n theme-QtCurve-common -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
-Pakiet z dokumentacja i plikami wsp�dzielonymi.
+Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
 %setup -q -c -a1 -a2
