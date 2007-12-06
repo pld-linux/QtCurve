@@ -1,0 +1,16 @@
+--- QtCurve-Gtk2-0.55.1/style/qt_settings.c~	2007-10-24 21:50:40.000000000 +0300
++++ QtCurve-Gtk2-0.55.1/style/qt_settings.c	2007-12-06 04:43:41.324215032 +0200
+@@ -1126,10 +1126,11 @@
+                      if(-1==lstat(sub, &statbuf))
+                      {
+                          FILE *in=NULL;
++                         char src[strlen(QTC_MOZILLA_DIR) + MAX_CSS_HOME + 10];
+ 
+-                         sprintf(sub, QTC_MOZILLA_DIR"/%s-user.js", app);
++                         sprintf(src, QTC_MOZILLA_DIR"/%s-user.js", app);
+ 
+-                         if((in=fopen(sub, "r")))
++                         if((in=fopen(src, "r")))
+                          {
+                              FILE *out=fopen(sub, "w");
+ 
