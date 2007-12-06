@@ -1,25 +1,26 @@
-#
-# ToDo:
+# TODO:
+#  - kde4
+#  - gtk1 no longer updated. drop?
 #  - include /usr/share/themes/QtCurve/mozilla somewhere
 #
 # Conditional build:
 %bcond_with	gtk	# build GTK styles
 %bcond_without	gtk2	# don't build GTK+2 styles
 #
-%define		kde_ver		0.53
-%define		gtk2_ver	0.53
+%define		kde_ver		0.55.1
+%define		gtk2_ver	0.55.1
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.53
+Version:	0.55.1
 Release:	1
 License:	GPL
 Group:		Themes
-Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.gz
-# Source0-md5:	6103ae2522b0a58aba0b611560abc793
-Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.gz
-# Source1-md5:	ee215112273fae935d22adaa216c85a4
+Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
+# Source0-md5:	1ba394626a40e8926966739500dbf87d
+Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
+# Source1-md5:	0d5eeb45990c3ecf060daa68a2ed2e6f
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-amd64.patch
