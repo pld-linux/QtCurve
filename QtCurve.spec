@@ -24,6 +24,7 @@ Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
 # Source1-md5:	0d5eeb45990c3ecf060daa68a2ed2e6f
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
+Patch0:	%{name}-Gtk2-userjs.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -102,6 +103,11 @@ Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
 %setup -q -c %{?with_gtk2:-a1} %{?with_gtk:-a2}
+%if %{with gtk2}
+cd %{name}-Gtk2-%{gtk2_ver}
+%patch0 -p1
+cd -
+%endif
 
 %build
 cd %{name}-KDE3-%{kde_ver}
