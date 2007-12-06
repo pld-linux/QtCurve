@@ -1,7 +1,8 @@
 # TODO:
-#  - kde4
-#  - gtk1 no longer updated. drop?
-#  - include /usr/share/themes/QtCurve/mozilla somewhere
+# - kde4
+# - gtk1 no longer updated. drop?
+# - include /usr/share/themes/QtCurve/mozilla somewhere
+# - unpackaged:
 #
 # Conditional build:
 %bcond_with	gtk	# build GTK styles
@@ -23,17 +24,16 @@ Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
 # Source1-md5:	0d5eeb45990c3ecf060daa68a2ed2e6f
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
-Patch0:		%{name}-amd64.patch
-Patch1:		kde-am110.patch
-Patch2:		kde-ac260-lt.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
 BuildRequires:	kdelibs-devel >= 3.1
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRequires:	sed > 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -86,35 +86,28 @@ Wersja pod GTK+2.
 Summary:	A free and corrected port of Redhats GTK+/Qt theme - common
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata - common
 Group:		Themes
-Obsoletes:	theme-bluecurve-common
-Obsoletes:	gtk2-theme-bluecurve
 Obsoletes:	gtk-theme-bluecurve
+Obsoletes:	gtk2-theme-bluecurve
 Obsoletes:	kde-style-bluecurve
 Obsoletes:	kde-theme-bluecurve
+Obsoletes:	theme-bluecurve-common
 
 %description -n theme-QtCurve-common
-A free and corrected port of Red Hat's GTK+/Qt theme.
-Documentation and common files package.
+A free and corrected port of Red Hat's GTK+/Qt theme. Documentation
+and common files package.
 
 %description -n theme-QtCurve-common -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
-%setup -q -c -a1 -a2
-#%patch0 -p1
-cd %{name}-KDE3-%{kde_ver}
-%patch1 -p1
-%patch2 -p1
+%setup -q -c %{?with_gtk2:-a1} %{?with_gtk:-a2}
 
 %build
 cd %{name}-KDE3-%{kde_ver}
-cp /usr/share/automake/config.sub admin
-
-%{__make} -f admin/Makefile.common cvs
-%configure \
-	--with-qt-libraries=%{_libdir}
-
+%cmake \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	.
 %{__make}
 cd -
 
@@ -132,12 +125,9 @@ cd -
 
 %if %{with gtk2}
 cd %{name}-Gtk2-%{gtk2_ver}
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure
+%cmake \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	.
 %{__make}
 cd -
 %endif
@@ -167,9 +157,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/kde3/kstyle_qtcurve_config.la
 %attr(755,root,root) %{_libdir}/kde3/kstyle_qtcurve_config.so
-%{_libdir}/kde3/plugins/styles/*.la
+#%{_libdir}/kde3/plugins/styles/*.la
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
+%{_datadir}/apps/kstyle/themes/qtc_klearlooks.themerc
 %{_datadir}/apps/QtCurve
 
 %if %{with gtk}
@@ -184,6 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gtk-2.0/*/*/*.so
 %{_datadir}/themes/QtCurve/gtk-2.0
+%{_datadir}/themes/QtCurve/mozilla
 %endif
 
 %files -n theme-QtCurve-common
