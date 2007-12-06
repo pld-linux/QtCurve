@@ -1,8 +1,6 @@
 # TODO:
 # - kde4
 # - gtk1 no longer updated. drop?
-# - include /usr/share/themes/QtCurve/mozilla somewhere
-# - unpackaged:
 #
 # Conditional build:
 %bcond_with	gtk	# build GTK styles
@@ -15,7 +13,7 @@ Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
 Version:	0.55.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
@@ -134,6 +132,9 @@ cd -
 %if %{with gtk2}
 cd %{name}-Gtk2-%{gtk2_ver}
 %cmake \
+	-DQTC_ADD_EVENT_FILTER=true \
+	-DQTC_MODIFY_MOZILLA=true \
+	-DQTC_MODIFY_MOZILLA_USER_JS=true \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	.
 %{__make}
@@ -155,6 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C %{name}-Gtk2-%{gtk2_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
+
+chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
+chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/mozilla/mailto.sh
 
 rm -f $RPM_BUILD_ROOT{%{_libdir}/gtk/themes/engines,%{_libdir}/gtk-2.0/*/*}/*.la
 
@@ -182,8 +186,16 @@ rm -rf $RPM_BUILD_ROOT
 %files -n gtk2-theme-QtCurve
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/gtk-2.0/*/*/*.so
-%{_datadir}/themes/QtCurve/gtk-2.0
-%{_datadir}/themes/QtCurve/mozilla
+%dir %{_datadir}/themes/QtCurve/gtk-2.0
+%{_datadir}/themes/QtCurve/gtk-2.0/gtkrc
+%{_datadir}/themes/QtCurve/gtk-2.0/icons3
+%{_datadir}/themes/QtCurve/gtk-2.0/icons4
+%attr(755,root,root) %{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
+%dir %{_datadir}/themes/QtCurve/mozilla
+%{_datadir}/themes/QtCurve/mozilla/QtCurve.css
+%{_datadir}/themes/QtCurve/mozilla/firefox-user.js
+%{_datadir}/themes/QtCurve/mozilla/preferences-rev.xml
+%attr(755,root,root) %{_datadir}/themes/QtCurve/mozilla/mailto.sh
 %endif
 
 %files -n theme-QtCurve-common
