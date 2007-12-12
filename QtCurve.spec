@@ -3,7 +3,7 @@
 # - gtk1 no longer updated. drop after dropping last gtk+ 1.x app
 #
 # Conditional build:
-%bcond_without	gtk	# build GTK+ styles
+%bcond_without	gtk	# don't build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
 %bcond_without	kde	# don't build KDE styles
 #
