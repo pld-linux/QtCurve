@@ -1,9 +1,9 @@
 # TODO:
 # - kde4
-# - gtk1 no longer updated. drop?
+# - gtk1 no longer updated. drop after dropping last gtk+ 1.x app
 #
 # Conditional build:
-%bcond_with	gtk	# build GTK styles
+%bcond_with	gtk	# build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
 #
 %define		kde_ver		0.55.1
