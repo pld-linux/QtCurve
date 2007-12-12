@@ -3,16 +3,18 @@
 # - gtk1 no longer updated. drop after dropping last gtk+ 1.x app
 #
 # Conditional build:
-%bcond_with	gtk	# build GTK+ styles
+%bcond_without	gtk	# build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
+%bcond_without	kde	# don't build KDE styles
 #
+%define		ver		0.55.1
 %define		kde_ver		0.55.1
 %define		gtk2_ver	0.55.1
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
-Version:	0.55.1
+Version:	%{ver}
 Release:	2
 License:	GPL
 Group:		Themes
@@ -30,7 +32,7 @@ BuildRequires:	automake
 BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
-BuildRequires:	kdelibs-devel >= 3.1
+%{?with_kde:BuildRequires:	kdelibs-devel >= 3.1}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.293
@@ -59,8 +61,9 @@ Wersja pod KDE.
 %package -n gtk-theme-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Version:	%{gtk1_ver}
 Group:		Themes
-Requires:	theme-QtCurve-common = %{version}-%{release}
+Requires:	theme-QtCurve-common = %{ver}-%{release}
 
 %description -n gtk-theme-QtCurve
 A free and corrected port of Red Hat's GTK+/Qt theme. GTK+ version.
@@ -72,8 +75,9 @@ Wersja pod GTK+.
 %package -n gtk2-theme-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Version:	%{gtk2_ver}
 Group:		Themes
-Requires:	theme-QtCurve-common = %{version}-%{release}
+Requires:	theme-QtCurve-common = %{ver}-%{release}
 
 %description -n gtk2-theme-QtCurve
 A free and corrected port of Red Hat's GTK+/Qt theme. GTK+2 version.
@@ -85,6 +89,7 @@ Wersja pod GTK+2.
 %package -n theme-QtCurve-common
 Summary:	A free and corrected port of Redhats GTK+/Qt theme - common
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata - common
+Version:	%{kde_ver}
 Group:		Themes
 Obsoletes:	gtk-theme-bluecurve
 Obsoletes:	gtk2-theme-bluecurve
@@ -101,7 +106,7 @@ Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
-%setup -q -c %{?with_gtk2:-a1} %{?with_gtk:-a2}
+%setup -q -c -D %{?with_kde:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2}
 %if %{with gtk2}
 cd %{name}-Gtk2-%{gtk2_ver}
 %patch0 -p1
@@ -110,12 +115,14 @@ cd -
 %endif
 
 %build
+%if %{with kde}
 cd %{name}-KDE3-%{kde_ver}
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	.
 %{__make}
 cd -
+%endif
 
 %if %{with gtk}
 cd %{name}-Gtk1-%{gtk1_ver}
@@ -144,8 +151,10 @@ cd -
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with kde}
 %{__make} -C %{name}-KDE3-%{kde_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT
+%endif
 
 %if %{with gtk}
 %{__make} -C %{name}-Gtk1-%{gtk1_ver} install \
@@ -155,25 +164,26 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gtk2}
 %{__make} -C %{name}-Gtk2-%{gtk2_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT
-%endif
 
 chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
 chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/mozilla/mailto.sh
+%endif
 
 rm -f $RPM_BUILD_ROOT{%{_libdir}/gtk/themes/engines,%{_libdir}/gtk-2.0/*/*}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with kde}
 %files -n kde-style-QtCurve
 %defattr(644,root,root,755)
 %{_libdir}/kde3/kstyle_qtcurve_config.la
 %attr(755,root,root) %{_libdir}/kde3/kstyle_qtcurve_config.so
-#%{_libdir}/kde3/plugins/styles/*.la
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
 %{_datadir}/apps/kstyle/themes/qtc_klearlooks.themerc
 %{_datadir}/apps/QtCurve
+%endif
 
 %if %{with gtk}
 %files -n gtk-theme-QtCurve
