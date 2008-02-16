@@ -1,0 +1,9 @@
+--- QtCurve-Gtk1-0.42.2/gtk/Makefile.am.orig	2008-02-16 21:40:20.000000000 +0000
++++ QtCurve-Gtk1-0.42.2/gtk/Makefile.am	2008-02-16 21:40:26.000000000 +0000
+@@ -1,5 +1,5 @@
+ INCLUDES = $(GTK_CFLAGS)
+-enginedir = $(GTK_PREFIX)/lib/gtk/themes/engines
++enginedir = $(GTK_PREFIX)/lib64/gtk/themes/engines
+ engine_LTLIBRARIES = libqtcurve.la
+ libqtcurve_la_SOURCES = qtcurve.c
+ libqtcurve_la_LDFLAGS = -module -avoid-version

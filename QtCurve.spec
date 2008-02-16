@@ -26,6 +26,7 @@ Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk2-userjs.patch
 Patch1:		%{name}-Gtk2-mailto.patch
+Patch2:		%{name}-Gtk1-lib64.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -113,6 +114,15 @@ cd %{name}-Gtk2-%{gtk2_ver}
 %patch1 -p0
 cd -
 %endif
+
+%if %{with gtk}
+%if "%{_lib}" == "lib64"
+cd %{name}-Gtk1-%{gtk1_ver}
+%patch2 -p1
+cd -
+%endif
+%endif
+
 
 %build
 %if %{with kde}
