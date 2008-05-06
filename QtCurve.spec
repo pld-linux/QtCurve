@@ -19,9 +19,9 @@ Release:	4
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	a866aee07bd7a115657bec5ab1a1b72c
+# Source0-md5:	5d7a2e2c5fc35fed7fb50e7ec2ecc5f4
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	ee7cb96f501f27705c4adc66ff08c98a
+# Source1-md5:	5ffb6966d1077526bfdb57de8258a57f
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk2-userjs.patch
