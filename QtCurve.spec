@@ -7,9 +7,9 @@
 %bcond_without	gtk2	# don't build GTK+2 styles
 %bcond_without	kde	# don't build KDE styles
 #
-%define		ver		0.55.1
-%define		kde_ver		0.55.1
-%define		gtk2_ver	0.55.1
+%define		ver		0.59.1
+%define		kde_ver		0.59.0
+%define		gtk2_ver	0.59.1
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -19,9 +19,9 @@ Release:	4
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	1ba394626a40e8926966739500dbf87d
+# Source0-md5:	a866aee07bd7a115657bec5ab1a1b72c
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	0d5eeb45990c3ecf060daa68a2ed2e6f
+# Source1-md5:	ee7cb96f501f27705c4adc66ff08c98a
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk2-userjs.patch
@@ -49,6 +49,7 @@ Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 %package -n kde-style-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Version:	%{kde_ver}
 Group:		Themes
 Requires:	kdelibs >= 3.1
 
@@ -90,7 +91,7 @@ Wersja pod GTK+2.
 %package -n theme-QtCurve-common
 Summary:	A free and corrected port of Redhats GTK+/Qt theme - common
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata - common
-Version:	%{kde_ver}
+Version:	%{ver}
 Group:		Themes
 Obsoletes:	gtk-theme-bluecurve
 Obsoletes:	gtk2-theme-bluecurve
