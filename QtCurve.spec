@@ -7,9 +7,9 @@
 %bcond_without	gtk2	# don't build GTK+2 styles
 %bcond_without	kde	# don't build KDE styles
 #
-%define		ver		0.59.2
-%define		kde_ver		0.59.2
-%define		gtk2_ver	0.59.3
+%define		ver		0.59.5
+%define		kde_ver		0.59.5
+%define		gtk2_ver	0.59.7
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -19,9 +19,9 @@ Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	8a0d6c5f475541853a5e0104400521f7
+# Source0-md5:	e6e721a38650c4c453c686c5d871862d
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	9a378e6f283379956786d6c599afe28e
+# Source1-md5:	afa418c3d22091fb4ef9397de0195a23
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk2-userjs.patch
@@ -221,5 +221,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n theme-QtCurve-common
 %defattr(644,root,root,755)
-%doc %{name}-KDE3-%{kde_ver}/{ChangeLog,README,TODO}
+%doc %{name}-KDE3-%{kde_ver}/ChangeLog
+%doc %{name}-KDE3-%{kde_ver}/README
+%doc %{name}-KDE3-%{kde_ver}/TODO
 %dir %{_datadir}/themes/QtCurve
