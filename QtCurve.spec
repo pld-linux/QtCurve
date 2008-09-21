@@ -130,6 +130,7 @@ cd -
 cd %{name}-KDE3-%{kde_ver}
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	.
 
 %{__make}
 cd -
@@ -154,6 +155,7 @@ cd %{name}-Gtk2-%{gtk2_ver}
 	-DQTC_MODIFY_MOZILLA=true \
 	-DQTC_MODIFY_MOZILLA_USER_JS=true \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	.
 
 %{__make}
 cd -
