@@ -7,9 +7,9 @@
 %bcond_without	gtk2	# don't build GTK+2 styles
 %bcond_without	kde	# don't build KDE styles
 #
-%define		ver		0.59.5
-%define		kde_ver		0.59.5
-%define		gtk2_ver	0.59.7
+%define		ver		0.62.6
+%define		kde_ver		0.62.6
+%define		gtk2_ver	0.62.6
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -19,9 +19,9 @@ Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	e6e721a38650c4c453c686c5d871862d
+# Source0-md5:	b957d5c83fb256ae8c9e36f552a13f0c
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	afa418c3d22091fb4ef9397de0195a23
+# Source1-md5:	5e507b9fd5839223612b825b299d3b14
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk2-userjs.patch
