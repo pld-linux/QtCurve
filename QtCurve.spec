@@ -7,9 +7,9 @@
 %bcond_without	gtk2	# don't build GTK+2 styles
 %bcond_without	kde	# don't build KDE styles
 #
-%define		ver		0.62.6
-%define		kde_ver		0.62.6
-%define		gtk2_ver	0.62.6
+%define		ver		0.68.1
+%define		kde_ver		0.68.1
+%define		gtk2_ver	0.68.1
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -19,14 +19,12 @@ Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	b957d5c83fb256ae8c9e36f552a13f0c
+# Source0-md5:	2451c8e624f8e07bfaf5584f4208c9d7
 Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	5e507b9fd5839223612b825b299d3b14
+# Source1-md5:	c7c2324e05aa09ecb26d1f9cc81a5e4a
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
-Patch0:		%{name}-Gtk2-userjs.patch
-Patch1:		%{name}-Gtk2-mailto.patch
-Patch2:		%{name}-Gtk1-lib64.patch
+Patch0:		%{name}-Gtk1-lib64.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -109,17 +107,11 @@ Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
 %setup -q -c -D %{?with_kde:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2}
-%if %{with gtk2}
-cd %{name}-Gtk2-%{gtk2_ver}
-%patch0 -p1
-%patch1 -p0
-cd -
-%endif
 
 %if %{with gtk}
 %if "%{_lib}" == "lib64"
 cd %{name}-Gtk1-%{gtk1_ver}
-%patch2 -p1
+%patch0 -p1
 cd -
 %endif
 %endif
@@ -179,7 +171,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
-chmod a+x $RPM_BUILD_ROOT%{_datadir}/themes/QtCurve/mozilla/mailto.sh
 %endif
 
 rm -f $RPM_BUILD_ROOT{%{_libdir}/gtk/themes/engines,%{_libdir}/gtk-2.0/*/*}/*.la
@@ -216,9 +207,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
 %dir %{_datadir}/themes/QtCurve/mozilla
 %{_datadir}/themes/QtCurve/mozilla/QtCurve.css
-%{_datadir}/themes/QtCurve/mozilla/firefox-user.js
+%{_datadir}/themes/QtCurve/mozilla/QtCurve-KDEButtonOrder.css
 %{_datadir}/themes/QtCurve/mozilla/preferences-rev.xml
-%attr(755,root,root) %{_datadir}/themes/QtCurve/mozilla/mailto.sh
 %endif
 
 %files -n theme-QtCurve-common
