@@ -4,7 +4,7 @@
 # Conditional build:
 %bcond_without	gtk	# don't build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
-%bcond_without	kde3	# don't build KDE3 styles
+%bcond_with		kde3	# build KDE3 styles
 %bcond_without	kde4	# don't build KDE4 styles
 
 %define		ver		1.0.1
