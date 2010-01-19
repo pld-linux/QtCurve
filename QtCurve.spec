@@ -1,13 +1,14 @@
 # TODO:
-# - kde4
 # - gtk1 no longer updated. drop after dropping last gtk+ 1.x app
 #
 # Conditional build:
 %bcond_without	gtk	# don't build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
-%bcond_without	kde3	# don't build KDE styles
+%bcond_without	kde3	# don't build KDE3 styles
+%bcond_without	kde4	# don't build KDE4 styles
 
 %define		ver		1.0.1
+%define		kde4_ver	1.0.1
 %define		kde3_ver	1.0.0
 %define		gtk2_ver	1.0.1
 %define		gtk1_ver	0.42.2
@@ -24,6 +25,8 @@ Source1:	http://craigd.wikispaces.com/file/view/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
 # Source1-md5:	8c574b955851e79397805db95ed08b62
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
+Source3:	http://craigd.wikispaces.com/file/view/%{name}-KDE4-%{kde4_ver}.tar.bz2
+# Source3-md5:	d60fff0f032bc86e6731468e37ba0226
 Patch0:		%{name}-Gtk1-lib64.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 BuildRequires:	autoconf
@@ -31,9 +34,11 @@ BuildRequires:	automake
 BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
+%{?with_kde4:BuildRequires:	kde4-kdelibs}
 %{?with_kde3:BuildRequires:	kdelibs-devel >= 3.1}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+%{?with_kde4:BuildRequires:	qt4-build}
 BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRequires:	sed > 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,11 +57,25 @@ Group:		Themes
 Requires:	kdelibs >= 3.1
 
 %description -n kde-style-QtCurve
-A free and corrected port of Red Hat's GTK+/Qt theme. KDE version.
+A free and corrected port of Red Hat's GTK+/Qt theme. KDE3 version.
 
 %description -n kde-style-QtCurve -l pl.UTF-8
 Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
-Wersja pod KDE.
+Wersja pod KDE3.
+
+%package -n kde4-style-QtCurve
+Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
+Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
+Version:	%{kde4_ver}
+Group:		Themes
+Requires:	kde4-kdebase >= 4.3.4
+
+%description -n kde4-style-QtCurve
+A free and corrected port of Red Hat's GTK+/Qt theme. KDE4 version.
+
+%description -n kde4-style-QtCurve -l pl.UTF-8
+Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
+Wersja pod KDE4.
 
 %package -n gtk-theme-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
@@ -106,7 +125,7 @@ Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
-%setup -q -c -D %{?with_kde3:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2}
+%setup -q -c -D %{?with_kde3:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2} %{?with_kde4:-a3}
 
 %if %{with gtk}
 %if "%{_lib}" == "lib64"
@@ -116,10 +135,19 @@ cd -
 %endif
 %endif
 
-
 %build
 %if %{with kde3}
 cd %{name}-KDE3-%{kde3_ver}
+%cmake \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	.
+
+%{__make}
+cd -
+%endif
+
+%if %{with kde4}
+cd %{name}-KDE4-%{kde4_ver}
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	.
@@ -162,6 +190,11 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
 
+%if %{with kde4}
+%{__make} -C %{name}-KDE4-%{kde4_ver} install \
+	DESTDIR=$RPM_BUILD_ROOT
+%endif
+
 %if %{with gtk}
 %{__make} -C %{name}-Gtk1-%{gtk1_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -187,8 +220,29 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
 %{_datadir}/apps/kdisplay/color-schemes/QtCurve.kcsrc
-%{_datadir}/themes/QtCurve/gtk-2.0/kdeglobals
 %{_datadir}/apps/QtCurve
+%endif
+
+%if %{with kde4}
+%files -n kde4-style-QtCurve
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/kde4/kstyle_qtcurve_config.so
+%attr(755,root,root) %{_libdir}/kde4/kwin3_qtcurve.so
+%attr(755,root,root) %{_libdir}/kde4/kwin_qtcurve_config.so
+%attr(755,root,root) %{_libdir}/kde4/plugins/styles/qtcurve.so
+%{_datadir}/apps/QtCurve/Agua.qtcurve
+%{_datadir}/apps/QtCurve/Curve.qtcurve
+%{_datadir}/apps/QtCurve/Flat.qtcurve
+%{_datadir}/apps/QtCurve/Human.qtcurve
+%{_datadir}/apps/QtCurve/Inverted.qtcurve
+%{_datadir}/apps/QtCurve/Klearlooks.qtcurve
+%{_datadir}/apps/QtCurve/Murrine.qtcurve
+%{_datadir}/apps/QtCurve/Ozone.qtcurve
+%{_datadir}/apps/QtCurve/Plastic.qtcurve
+%{_datadir}/apps/QtCurve/Silk.qtcurve
+%{_datadir}/apps/color-schemes/QtCurve.colors
+%{_datadir}/apps/kstyle/themes/qtcurve.themerc
+%{_datadir}/apps/kwin/qtcurve.desktop
 %endif
 
 %if %{with gtk}
@@ -206,6 +260,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/themes/QtCurve/gtk-2.0/gtkrc
 %{_datadir}/themes/QtCurve/gtk-2.0/icons3
 %{_datadir}/themes/QtCurve/gtk-2.0/icons4
+%{_datadir}/themes/QtCurve/gtk-2.0/kdeglobals
 %attr(755,root,root) %{_datadir}/themes/QtCurve/gtk-2.0/map_kde_icons.pl
 %dir %{_datadir}/themes/QtCurve/mozilla
 %{_datadir}/themes/QtCurve/mozilla/QtCurve.css
