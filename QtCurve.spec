@@ -34,6 +34,7 @@ BuildRequires:	automake
 BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
+%{?with_kde4:BuildRequires:	kde4-kdebase-workspace-devel}
 %{?with_kde4:BuildRequires:	kde4-kdelibs-devel}
 %{?with_kde4:BuildRequires:	kde4-kdelibs}
 %{?with_kde3:BuildRequires:	kdelibs-devel >= 3.1}
