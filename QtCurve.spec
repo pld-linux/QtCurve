@@ -5,11 +5,11 @@
 # Conditional build:
 %bcond_without	gtk	# don't build GTK+ styles
 %bcond_without	gtk2	# don't build GTK+2 styles
-%bcond_without	kde	# don't build KDE styles
-#
-%define		ver		0.68.1
-%define		kde_ver		0.68.1
-%define		gtk2_ver	0.68.1
+%bcond_without	kde3	# don't build KDE styles
+
+%define		ver		1.0.1
+%define		kde3_ver	1.0.0
+%define		gtk2_ver	1.0.1
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -18,10 +18,10 @@ Version:	%{ver}
 Release:	1
 License:	GPL
 Group:		Themes
-Source0:	http://home.freeuk.com/cpdrummond/%{name}-KDE3-%{kde_ver}.tar.bz2
-# Source0-md5:	2451c8e624f8e07bfaf5584f4208c9d7
-Source1:	http://home.freeuk.com/cpdrummond/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	c7c2324e05aa09ecb26d1f9cc81a5e4a
+Source0:	http://craigd.wikispaces.com/file/view/%{name}-KDE3-%{kde3_ver}.tar.bz2
+# Source0-md5:	b3bd5675fc954a4a01e691e7d5be35ee
+Source1:	http://craigd.wikispaces.com/file/view/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
+# Source1-md5:	8c574b955851e79397805db95ed08b62
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Patch0:		%{name}-Gtk1-lib64.patch
@@ -31,7 +31,7 @@ BuildRequires:	automake
 BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
-%{?with_kde:BuildRequires:	kdelibs-devel >= 3.1}
+%{?with_kde3:BuildRequires:	kdelibs-devel >= 3.1}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.293
@@ -47,7 +47,7 @@ Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 %package -n kde-style-QtCurve
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
-Version:	%{kde_ver}
+Version:	%{kde3_ver}
 Group:		Themes
 Requires:	kdelibs >= 3.1
 
@@ -106,7 +106,7 @@ Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata.
 Pakiet z dokumentacja i plikami współdzielonymi.
 
 %prep
-%setup -q -c -D %{?with_kde:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2}
+%setup -q -c -D %{?with_kde3:-a0} %{?with_gtk2:-a1} %{?with_gtk:-a2}
 
 %if %{with gtk}
 %if "%{_lib}" == "lib64"
@@ -118,8 +118,8 @@ cd -
 
 
 %build
-%if %{with kde}
-cd %{name}-KDE3-%{kde_ver}
+%if %{with kde3}
+cd %{name}-KDE3-%{kde3_ver}
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	.
@@ -157,8 +157,8 @@ cd -
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with kde}
-%{__make} -C %{name}-KDE3-%{kde_ver} install \
+%if %{with kde3}
+%{__make} -C %{name}-KDE3-%{kde3_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
 
@@ -179,14 +179,15 @@ rm -f $RPM_BUILD_ROOT{%{_libdir}/gtk/themes/engines,%{_libdir}/gtk-2.0/*/*}/*.la
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with kde}
+%if %{with kde3}
 %files -n kde-style-QtCurve
 %defattr(644,root,root,755)
 %{_libdir}/kde3/kstyle_qtcurve_config.la
 %attr(755,root,root) %{_libdir}/kde3/kstyle_qtcurve_config.so
 %attr(755,root,root) %{_libdir}/kde3/plugins/styles/*.so
 %{_datadir}/apps/kstyle/themes/qtcurve*.themerc
-%{_datadir}/apps/kstyle/themes/qtc_klearlooks.themerc
+%{_datadir}/apps/kdisplay/color-schemes/QtCurve.kcsrc
+%{_datadir}/themes/QtCurve/gtk-2.0/kdeglobals
 %{_datadir}/apps/QtCurve
 %endif
 
@@ -214,7 +215,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n theme-QtCurve-common
 %defattr(644,root,root,755)
-%doc %{name}-KDE3-%{kde_ver}/ChangeLog
-%doc %{name}-KDE3-%{kde_ver}/README
-%doc %{name}-KDE3-%{kde_ver}/TODO
+%doc %{name}-KDE3-%{kde3_ver}/ChangeLog
+%doc %{name}-KDE3-%{kde3_ver}/README
+%doc %{name}-KDE3-%{kde3_ver}/TODO
 %dir %{_datadir}/themes/QtCurve
