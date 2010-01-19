@@ -130,6 +130,7 @@ cd -
 
 %if %{with gtk}
 cd %{name}-Gtk1-%{gtk1_ver}
+rm -f acinclude.m4
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
