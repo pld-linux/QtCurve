@@ -29,8 +29,11 @@ Source3:	http://craigd.wikispaces.com/file/view/%{name}-KDE4-%{kde4_ver}.tar.bz2
 # Source3-md5:	d60fff0f032bc86e6731468e37ba0226
 Patch0:		%{name}-Gtk1-lib64.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
+%{?with_kde4:BuildRequires:	Qt3Support-devel}
+%{?with_kde4:BuildRequires:	QtSvg-devel}
 BuildRequires:	autoconf
 BuildRequires:	automake
+%{?with_kde4:BuildRequires:	automoc4}
 BuildRequires:	cmake
 %{?with_gtk:BuildRequires:	gtk+-devel}
 %{?with_gtk2:BuildRequires:	gtk+2-devel}
@@ -41,6 +44,7 @@ BuildRequires:	cmake
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 %{?with_kde4:BuildRequires:	qt4-build}
+%{?with_kde4:BuildRequires:	qt4-qmake}
 BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRequires:	sed > 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
