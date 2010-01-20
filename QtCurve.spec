@@ -16,7 +16,7 @@ Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
 Name:		QtCurve
 Version:	%{ver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Themes
 Source0:	http://craigd.wikispaces.com/file/view/%{name}-KDE3-%{kde3_ver}.tar.bz2
@@ -236,16 +236,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde4/kwin3_qtcurve.so
 %attr(755,root,root) %{_libdir}/kde4/kwin_qtcurve_config.so
 %attr(755,root,root) %{_libdir}/kde4/plugins/styles/qtcurve.so
-%{_datadir}/apps/QtCurve/Agua.qtcurve
-%{_datadir}/apps/QtCurve/Curve.qtcurve
-%{_datadir}/apps/QtCurve/Flat.qtcurve
-%{_datadir}/apps/QtCurve/Human.qtcurve
-%{_datadir}/apps/QtCurve/Inverted.qtcurve
-%{_datadir}/apps/QtCurve/Klearlooks.qtcurve
-%{_datadir}/apps/QtCurve/Murrine.qtcurve
-%{_datadir}/apps/QtCurve/Ozone.qtcurve
-%{_datadir}/apps/QtCurve/Plastic.qtcurve
-%{_datadir}/apps/QtCurve/Silk.qtcurve
+%{_datadir}/apps/QtCurve
 %{_datadir}/apps/color-schemes/QtCurve.colors
 %{_datadir}/apps/kstyle/themes/qtcurve.themerc
 %{_datadir}/apps/kwin/qtcurve.desktop
