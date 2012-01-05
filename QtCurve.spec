@@ -7,10 +7,10 @@
 %bcond_with		kde3	# build KDE3 styles
 %bcond_without	kde4	# don't build KDE4 styles
 
-%define		ver		1.4.3
-%define		kde4_ver	1.4.3
-%define		kde3_ver	1.4.1
-%define		gtk2_ver	1.4.1
+%define		ver		1.8.9
+%define		kde4_ver	1.8.9
+%define		kde3_ver	1.8.5
+%define		gtk2_ver	1.8.12
 %define		gtk1_ver	0.42.2
 Summary:	A free and corrected port of Red Hat's GTK+/Qt theme
 Summary(pl.UTF-8):	Darmowa i poprawiona wersja motywu GTK+/Qt zrobionego przez Red Hata
@@ -20,13 +20,13 @@ Release:	1
 License:	GPL
 Group:		Themes
 Source0:	http://craigd.wikispaces.com/file/view/%{name}-KDE3-%{kde3_ver}.tar.bz2
-# Source0-md5:	eee4bf7a5a3b4f530040993c337d940b
+# Source0-md5:	d9cca99526079782f9fc7bd7ba432582
 Source1:	http://craigd.wikispaces.com/file/view/%{name}-Gtk2-%{gtk2_ver}.tar.bz2
-# Source1-md5:	a651330e422dbe5cdbfeffc2eaadf1e8
+# Source1-md5:	e1b8b4a8444c0afe8ba291f623c6b713
 Source2:	http://home.freeuk.com/cpdrummond/%{name}-Gtk1-%{gtk1_ver}.tar.gz
 # Source2-md5:	8219f58493ca4e65a8fe61ee76eca522
 Source3:	http://craigd.wikispaces.com/file/view/%{name}-KDE4-%{kde4_ver}.tar.bz2
-# Source3-md5:	bfa9e49350ba46e77c70bb8a93b036dc
+# Source3-md5:	0028e3da714cd0932e16c7f937e487a1
 Patch0:		%{name}-Gtk1-lib64.patch
 URL:		http://www.kde-look.org/content/show.php?content=40492
 %{?with_kde4:BuildRequires:	Qt3Support-devel}
