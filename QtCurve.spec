@@ -136,7 +136,7 @@ Pakiet z dokumentacja i plikami współdzielonymi.
 %if %{with gtk}
 %if "%{_lib}" == "lib64"
 cd %{name}-Gtk1-%{gtk1_ver}
-%patch0 -p1
+%patch -P0 -p1
 cd -
 %endif
 %endif
